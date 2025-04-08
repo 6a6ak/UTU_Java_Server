@@ -36,6 +36,30 @@ function restart_mysql() {
     echo "✅ MySQL service restarted."
 }
 
+function create_or_reset_mysql_user() {
+    read -p "Enter MySQL admin username (e.g., root): " admin_user
+    read -s -p "Enter password for '$admin_user': " admin_pass
+    echo
+    read -p "Enter the new MySQL username to create or reset: " mysql_user
+    read -s -p "Enter the password for user '$mysql_user': " mysql_pass
+    echo
+
+    sql_query="
+    CREATE USER IF NOT EXISTS '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_pass';
+    ALTER USER '$mysql_user'@'localhost' IDENTIFIED WITH mysql_native_password BY '$mysql_pass';
+    GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'localhost' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
+    "
+
+    echo "Applying changes in MySQL..."
+    mysql -u "$admin_user" -p"$admin_pass" -e "$sql_query"
+    if [ $? -eq 0 ]; then
+        echo "✅ MySQL user '$mysql_user' created or updated successfully."
+    else
+        echo "❌ Failed to create or update user. Please check credentials."
+    fi
+}
+
 function menu() {
     clear
     echo "----------------------------"
@@ -48,12 +72,13 @@ function menu() {
     echo "5. Check MySQL Status"
     echo "6. Restart MySQL"
     echo "7. Exit"
+    echo "8. Create or Reset a MySQL User"
     echo "----------------------------"
 }
 
 while true; do
     menu
-    read -p "Choose an option [1-7]: " opt
+    read -p "Choose an option [1-8]: " opt
     case $opt in
         1) install_java ;;
         2) install_mysql ;;
@@ -62,6 +87,7 @@ while true; do
         5) mysql_status ;;
         6) restart_mysql ;;
         7) echo "Bye!"; exit 0 ;;
+        8) create_or_reset_mysql_user ;;
         *) echo "Invalid option!" ;;
     esac
     read -p "Press [Enter] to return to menu..."
