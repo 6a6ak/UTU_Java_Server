@@ -21,18 +21,18 @@ This is an interactive **Bash script** for Ubuntu that simplifies the installati
 ### 1. Clone or Download the Script
 
 ```bash
-git clone https://github.com/yourusername/java-mysql-installer.git
-cd java-mysql-installer
+git clone https://github.com/6a6ak/UTU_Java_Server.git
+
 ```
 
-> Or simply copy the `installer.sh` file to your Ubuntu system.
+> Or simply copy the `UTU_Java_Server.sh` file to your Ubuntu system.
 
 ---
 
 ### 2. Make the Script Executable
 
 ```bash
-chmod +x installer.sh
+chmod +x UTU_Java_Server.sh
 ```
 
 ---
@@ -40,7 +40,7 @@ chmod +x installer.sh
 ### 3. Run the Script
 
 ```bash
-./installer.sh
+./UTU_Java_Server.sh
 ```
 
 You will be presented with a menu like this:
@@ -73,7 +73,7 @@ Simply type the number of the action you want to perform.
 
 ## 📁 Files
 
-- `installer.sh` — Main Bash script
+- `UTU_Java_Server.sh` — Main Bash script
 - `README.md` — This file
 
 ---
