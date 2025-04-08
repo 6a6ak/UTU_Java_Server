@@ -71,8 +71,8 @@ function menu() {
     echo "4. Change MySQL Root Password"
     echo "5. Check MySQL Status"
     echo "6. Restart MySQL"
-    echo "7. Exit"
-    echo "8. Create or Reset a MySQL User"
+    echo "7. Create or Reset a MySQL User"
+    echo "8. Exit"
     echo "----------------------------"
 }
 
@@ -86,8 +86,8 @@ while true; do
         4) change_mysql_root_password ;;
         5) mysql_status ;;
         6) restart_mysql ;;
-        7) echo "Bye!"; exit 0 ;;
-        8) create_or_reset_mysql_user ;;
+        7) create_or_reset_mysql_user ;; # Swapped with option 8
+        8) echo "Bye!"; exit 0 ;;         # Swapped with option 7
         *) echo "Invalid option!" ;;
     esac
     read -p "Press [Enter] to return to menu..."
